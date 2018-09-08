@@ -17,7 +17,7 @@ Group {{ apache_group }}
 
 AccessFileName .htaccess
 <FilesMatch "^\.ht">
-{% if apache_version.split('.')[1] == '4' %}
+{% if apache_version.split('.')[1] > '2' %}
     Require all denied
 {% else %}
      Order allow,deny
@@ -52,14 +52,14 @@ LogFormat "%h %l %u %t \"%r\" }}s %b" common
 LogFormat "%{Referer}i -> %U" referer
 LogFormat "%{User-agent}i" agent
 
-{% if apache_version.split('.')[1] == '4' %}
+{% if apache_version.split('.')[1] > '2' %}
 IncludeOptional "{{ apache_confd_dir }}/*.conf"
 {% else %}
 Include "{{ apache_confd_dir }}/*.conf"
 {% endif %}
 
 {% if apache_vhost_load_dir != apache_confd_dir %}
-{% if apache_version.split('.')[1] == '4' %}
+{% if apache_version.split('.')[1] > '2' %}
 IncludeOptional "{{ apache_vhost_load_dir }}/*"
 {% else %}
 Include "{{ apache_vhost_load_dir }}/*"
@@ -76,7 +76,7 @@ Alias /error/ "{{ apache_error_documents_path }}/"
   AddOutputFilter Includes html
   AddHandler type-map var
 # TODO
-{% if apache_version.split('.')[1] == '4' %}
+{% if apache_version.split('.')[1] > '2' %}
   Require all granted
 {% else %}
   Order allow,deny

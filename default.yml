@@ -1,0 +1,6 @@
+---
+- name: wrapper playbook for kitchen testing "ansible-apache-hardening"
+  hosts: localhost
+  roles:
+    - geerlingguy.apache
+    #- ansible-apache-hardening

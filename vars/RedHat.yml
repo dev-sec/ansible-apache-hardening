@@ -14,6 +14,8 @@ apache_logroot: "/var/log/httpd"
 
 apache_error_documents_path: "/usr/share/httpd/error"
 apache_icons_path: "/var/www/icons"
+apache_file_owner: "root"
+apache_file_group: "root"
 apache_user: "apache"
 apache_group: "apache"
 
